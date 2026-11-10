@@ -27,7 +27,7 @@ const initialCards = [
 
 const cardsList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
-
+const editButton = document.querySelector(".profile__edit-button");
 const newCardPopup = document.querySelector("#new-card-popup");
 const addButton = document.querySelector(".profile__add-button");
 const newCardCloseButton = document.querySelector(
@@ -44,11 +44,11 @@ const popupCaption = imagePopup.querySelector(".popup__caption");
 const imagePopupCloseButton = imagePopup.querySelector(".popup__close");
 
 function openModal(modal) {
-  modal.classList.add("popup_opened");
+  modal.classList.add("popup_is-opened");
 }
 
 function closeModal(modal) {
-  modal.classList.remove("popup_opened");
+  modal.classList.remove("popup_is-opened");
 }
 
 function getCardElement(
@@ -66,7 +66,7 @@ function getCardElement(
   cardImage.alt = name;
 
   likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
+    likeButton.classList.toggle("card__like-button_is-active");
   });
 
   deleteButton.addEventListener("click", () => {
@@ -90,6 +90,10 @@ function renderCard(name, link, container) {
 
 initialCards.forEach((card) => {
   renderCard(card.name, card.link, cardsList);
+});
+
+editButton.addEventListener("click", () => {
+  openModal(newCardPopup);
 });
 
 addButton.addEventListener("click", () => {
