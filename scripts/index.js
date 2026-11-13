@@ -28,8 +28,11 @@ const initialCards = [
 const cardsList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
 const editButton = document.querySelector(".profile__edit-button");
+const editPopup = document.querySelector("#edit-popup");
 const newCardPopup = document.querySelector("#new-card-popup");
 const addButton = document.querySelector(".profile__add-button");
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
 const newCardCloseButton = document.querySelector(
   "#new-card-popup .popup__close",
 );
@@ -37,8 +40,12 @@ const newCardCloseButton = document.querySelector(
 const newCardForm = document.querySelector("#new-card-form");
 const inputCardName = newCardForm.querySelector(".popup__input_type_card-name");
 const inputCardLink = newCardForm.querySelector(".popup__input_type_url");
-
 const imagePopup = document.querySelector("#image-popup");
+const inputTypeName = document.querySelector(".popup__input_type_name");
+const inputTypeDescription = document.querySelector(
+  ".popup__input_type_description",
+);
+const editProfileCloseButton = editPopup.querySelector(".popup__close");
 const popupImage = imagePopup.querySelector(".popup__image");
 const popupCaption = imagePopup.querySelector(".popup__caption");
 const imagePopupCloseButton = imagePopup.querySelector(".popup__close");
@@ -93,7 +100,9 @@ initialCards.forEach((card) => {
 });
 
 editButton.addEventListener("click", () => {
-  openModal(newCardPopup);
+  inputTypeName.value = profileTitle.textContent;
+  inputTypeDescription.value = profileDescription.textContent;
+  openModal(editPopup);
 });
 
 addButton.addEventListener("click", () => {
@@ -102,6 +111,10 @@ addButton.addEventListener("click", () => {
 
 newCardCloseButton.addEventListener("click", () => {
   closeModal(newCardPopup);
+});
+
+editProfileCloseButton.addEventListener("click", () => {
+  closeModal(editPopup);
 });
 
 function handleCardFormSubmit(evt) {
@@ -117,6 +130,14 @@ function handleCardFormSubmit(evt) {
 }
 
 newCardForm.addEventListener("submit", handleCardFormSubmit);
+
+const editProfileForm = document.querySelector("#edit-profile-form");
+editProfileForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  profileTitle.textContent = inputTypeName.value;
+  profileDescription.textContent = inputTypeDescription.value;
+  closeModal(editPopup);
+});
 
 imagePopupCloseButton.addEventListener("click", () => {
   closeModal(imagePopup);
