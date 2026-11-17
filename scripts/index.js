@@ -142,3 +142,19 @@ editProfileForm.addEventListener("submit", (evt) => {
 imagePopupCloseButton.addEventListener("click", () => {
   closeModal(imagePopup);
 });
+
+const popups = document.querySelectorAll(".popup");
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    closeModal(popup);
+  });
+});
+
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    popups.forEach((popup) => {
+      closeModal(popup);
+    });
+  }
+});
